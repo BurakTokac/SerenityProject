@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
+import static org.hamcrest.Matchers.is;
 
 
 @SerenityTest
@@ -76,12 +77,11 @@ public class SpartanAdminTest {
         Ensure.that("Status code is 200",x->x.statusCode(200));
 
         // Ensure that content type is CONTENT TYPE JSON
-
+        Ensure.that("Content Type is JSON ",vRes->vRes.contentType(ContentType.JSON));
         // Ensure that ID  is 45
-
-
-
-
+        Ensure.that("ID is 45",vRes-> vRes.body("id",is(45)));
+        // Ensure that Expires header  is 0
+        Ensure.that("Expires header  is 0",vRes->vRes.header("Expires",is("0")));
 
 
     }
