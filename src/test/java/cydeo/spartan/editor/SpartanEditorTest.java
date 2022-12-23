@@ -51,23 +51,18 @@ public class SpartanEditorTest extends SpartanTestBase {
 
         //Content Type
         Ensure.that("Content Type is JSON",vRes->vRes.contentType(ContentType.JSON));
-
         //A Spartan is Born!
         Ensure.that("Success Mesage is A Spartan is Born!",vRes->vRes.body("success",is("A Spartan is Born!")));
-
         // id is not null
         Ensure.that("ID is NOT NULL",vRes->vRes.body("data.id",notNullValue()));
-
         // name is correct
         Ensure.that("Name is Correct",vRes->vRes.body("data.name",is(spartanMap.get("name"))));
         // gender is correct
         Ensure.that("Gender is Correct",vRes->vRes.body("data.gender",is(spartanMap.get("gender"))));
         // phone is correct
         Ensure.that("Phone is correct",vRes-> vRes.body("data.phone",is(spartanMap.get("phone"))));
-
         //EXTRACT DATA FROM ID
         String id = lastResponse().jsonPath().getString("data.id");
-
         // check location header ends with newly generated id
         Ensure.that("check location header ends with newly generated id",vRes->vRes.header("Location",endsWith(id)));
 
