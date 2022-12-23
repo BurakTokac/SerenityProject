@@ -2,8 +2,7 @@ package cydeo.spartan.admin;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import net.serenitybdd.core.Serenity;
+import io.restassured.response.ValidatableResponse;
 import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
 import net.serenitybdd.rest.SerenityRest;
@@ -29,13 +28,13 @@ public class SpartanAdminTest {
     @Test
     public void test1() {
 
-        given().accept(ContentType.JSON)
+       given().accept(ContentType.JSON)
                 .auth().basic("admin", "admin").
                 when().get("/api/spartans").prettyPeek()
-                .then().statusCode(200);
+                .then().statusCode(200).contentType(ContentType.JSON);
 
 
-      //  System.out.println("response.path(\"id[0]\") = " + response.path("id[0]"));
+        //  System.out.println("response.path(\"id[0]\") = " + response.path("id[0]"));
 
       //  System.out.println("response.statusCode() = " + response.statusCode());
 
