@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import utilities.SpartanTestBase;
 import utilities.SpartanUtil;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static net.serenitybdd.rest.SerenityRest.given;
@@ -85,8 +86,30 @@ public class SpartanEditorTest extends SpartanTestBase {
         System.out.println("gender = " + gender);
         System.out.println("phone = " + phone);
 
+        Map<String,Object> spartanMap=new LinkedHashMap<>();
+        spartanMap.put("name",name);
+        spartanMap.put("gender",gender);
+        spartanMap.put("phone",phone);
+
+        System.out.println("spartanMap = " + spartanMap);
+
+
+        given().auth().basic("admin","admin")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(spartanMap)
+                .when().post("/spartans");
+
+
+
+
+        //status code is 201
+
+        //content type is CONTENT TYPE JSON
+
+        // A Spartan is Born!
+
 
     }
-
 
 }
