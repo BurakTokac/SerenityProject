@@ -6,6 +6,8 @@ import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import utilities.SpartanTestBase;
 import utilities.SpartanUtil;
 
@@ -67,4 +69,24 @@ public class SpartanEditorTest extends SpartanTestBase {
         Ensure.that("check location header ends with newly generated id",vRes->vRes.header("Location",endsWith(id)));
 
     }
+    /*
+
+    {index} --> will shown in screen based on number of iteration
+    {0} --> it refers name
+    {1} --> it refers gender
+    {2} --> it refers phone
+     */
+
+    @ParameterizedTest(name ="POST SPARTAN {index} name {0}")
+    @CsvFileSource(resources = "/SpartanPOST.csv",numLinesToSkip = 1)
+    public void POSTSpartan(String name,String gender, long phone){
+
+        System.out.println("name = " + name);
+        System.out.println("gender = " + gender);
+        System.out.println("phone = " + phone);
+
+
+    }
+
+
 }
