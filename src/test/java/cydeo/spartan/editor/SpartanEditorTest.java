@@ -100,14 +100,12 @@ public class SpartanEditorTest extends SpartanTestBase {
                 .body(spartanMap)
                 .when().post("/spartans");
 
-
-
-
         //status code is 201
-
+        Ensure.that("Status Code is 201",vRes->vRes.statusCode(201));
         //content type is CONTENT TYPE JSON
-
+        Ensure.that("Content Type is JSON",vRes->vRes.contentType(ContentType.JSON));
         // A Spartan is Born!
+        Ensure.that("A Spartan is Born!",vRes->vRes.body("success",is("A Spartan is Born!")));
 
 
     }
